@@ -1,0 +1,13 @@
+name: every min
+
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: say hi
+        shell: bash
+        run: echo hi
