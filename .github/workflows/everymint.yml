@@ -2,7 +2,7 @@ name: every min
 
 on:
   schedule:
-    #- cron: '* * * * *'
+    - cron: '*/5 * * * *' #run after 5 mins
 
 jobs:
   echo:
