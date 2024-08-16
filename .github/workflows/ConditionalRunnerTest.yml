@@ -13,9 +13,6 @@ jobs:
     if: ${{ inputs['input-var'] == 'yes' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Print input-var value
-        run: echo "Input value is: ${{ inputs['input-var'] }}"
-        
       - name: Print yes
         run: echo "Yes"
 
@@ -23,8 +20,5 @@ jobs:
     if: ${{ inputs['input-var'] == 'no' }}
     runs-on: macos-latest
     steps:
-      - name: Print input-var value
-        run: echo "Input value is: ${{ inputs['input-var'] }}"
-        
       - name: Print no
         run: echo "No"
