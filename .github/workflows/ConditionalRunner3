@@ -1,0 +1,34 @@
+name: Conditional Self-Hosted Runners Testing
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Deployment Environment
+        required: true
+        default: development
+
+jobs:
+  set-runner-label:
+    runs-on: ubuntu-latest
+    outputs:
+      runner_label:
+        description: 'The runner label based on the environment input'
+        value: ${{ steps.set-label.outputs.runner_label }}
+    steps:
+      - name: Determine Runner Label
+        id: set-label
+        run: echo "::set-output name=runner_label::${{ github.event.inputs.environment == 'stage' && 'self-hosted, stg' || 'self-hosted, dev' }}"
+
+  test-self-hosted-runners-with-environment:
+    runs-on: ${{ needs.set-runner-label.outputs.runner_label }}
+    needs: set-runner-label
+    steps:
+      - name: Debug Matrix
+        run: |
+          echo "Runner: ${{ needs.set-runner-label.outputs.runner_label }}"
+          echo "Environment: ${{ inputs.environment }}"
