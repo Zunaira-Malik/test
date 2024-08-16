@@ -1,0 +1,25 @@
+name: Conditional Runner Test 2
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Set the input variable to yes or no'
+        required: true
+        default: 'yes'
+
+jobs:
+  conditional-job:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            env: yes
+          - os: macos-latest
+            env: no
+    steps:
+      - name: Print environment
+        if: ${{ matrix.env == inputs.env }}
+        run: echo "${{ matrix.env }}"
