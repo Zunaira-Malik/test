@@ -3,21 +3,21 @@ name: Conditional Runner Test
 on:
   workflow_dispatch:
     inputs:
-      input-var:
+      env:
         description: 'Set the input variable to yes or no'
         required: true
         default: 'yes'
 
 jobs:
   run-on-ubuntu:
-    if: ${{ inputs['input-var'] == 'yes' }}
+    if: ${{ inputs.env == 'yes' }}
     runs-on: ubuntu-latest
     steps:
       - name: Print yes
         run: echo "Yes"
 
   run-on-macos:
-    if: ${{ inputs['input-var'] == 'no' }}
+    if: ${{ inputs['env'] == 'no' }}
     runs-on: macos-latest
     steps:
       - name: Print no
