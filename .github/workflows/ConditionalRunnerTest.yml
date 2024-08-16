@@ -9,16 +9,22 @@ on:
         default: 'yes'
 
 jobs:
-  test-job:
-    runs-on: ${{ inputs['input-var'] == 'yes' && 'ubuntu-latest' || 'debian-latest' }}
+  run-on-ubuntu:
+    if: ${{ inputs['input-var'] == 'yes' }}
+    runs-on: ubuntu-latest
     steps:
       - name: Print input-var value
         run: echo "Input value is: ${{ inputs['input-var'] }}"
-
-      - name: Print yes if input is yes
-        if: ${{ inputs['input-var'] == 'yes' }}
+        
+      - name: Print yes
         run: echo "Yes"
 
-      - name: Print no if input is no
-        if: ${{ inputs['input-var'] == 'no' }}
+  run-on-macos:
+    if: ${{ inputs['input-var'] == 'no' }}
+    runs-on: macos-latest
+    steps:
+      - name: Print input-var value
+        run: echo "Input value is: ${{ inputs['input-var'] }}"
+        
+      - name: Print no
         run: echo "No"
