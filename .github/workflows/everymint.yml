@@ -1,13 +1,13 @@
-name: every min
+#name: every min
 
-on:
-  schedule:
+#on:
+ # schedule:
     #- cron: '*/5 * * * *' #run after 5 mins
 
-jobs:
-  echo:
-    runs-on: ubuntu-latest
-    steps:
-      - name: say hi
-        shell: bash
-        run: echo hi
+#jobs:
+ # echo:
+  #  runs-on: ubuntu-latest
+   # steps:
+    #  - name: say hi
+     #   shell: bash
+      #  run: echo hi
