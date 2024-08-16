@@ -1,0 +1,24 @@
+name: Conditional Runner Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      input-var:
+        description: 'Set the input variable to yes or no'
+        required: true
+        default: 'yes'
+
+jobs:
+  test-job:
+    runs-on: ${{ inputs['input-var'] == 'yes' && 'ubuntu-latest' || 'debian-latest' }}
+    steps:
+      - name: Print input-var value
+        run: echo "Input value is: ${{ inputs['input-var'] }}"
+
+      - name: Print yes if input is yes
+        if: ${{ inputs['input-var'] == 'yes' }}
+        run: echo "Yes"
+
+      - name: Print no if input is no
+        if: ${{ inputs['input-var'] == 'no' }}
+        run: echo "No"
